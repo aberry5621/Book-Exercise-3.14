@@ -18,12 +18,9 @@ int main() {
     cout << "Let's Play The Lottery \n";
     
     // Data and Initialization
-    int lottery = 0;
     int lottery_digit_1 = 0;
     int lottery_digit_2 = 0;
     int lottery_digit_3 = 0;
-    int pick = 0;
-    int temp = 0;
     int pick_digit_1 = 0;
     int pick_digit_2 = 0;
     int pick_digit_3 = 0;
@@ -31,7 +28,7 @@ int main() {
     
     // I
     cout << "Enter your lottery pick (three digits): ";
-    cin >> pick;
+    cin >> pick_digit_1 >> pick_digit_2 >> pick_digit_3;
     
     // P
     
@@ -40,28 +37,30 @@ int main() {
     lottery_digit_2 = rand() % 10;
     lottery_digit_3 = rand() % 10;
     
-    // get guess digits
-    pick_digit_1 = pick % 10;
-    temp = pick - pick_digit_1;
-    pick_digit_2 = temp % 10;
-    temp = temp - pick_digit_2;
-    pick_digit_3 = temp % 10;
-    
     // O
     cout << "The lottery numbers are " << lottery_digit_1  << lottery_digit_2 << lottery_digit_3 << endl;
     
     cout << "Pick numbers are " << pick_digit_1  << pick_digit_2 << pick_digit_3 << endl;
     
-    if (pick == lottery)
+    if (pick_digit_1 == lottery_digit_1 &&
+        pick_digit_2 == lottery_digit_2 &&
+        pick_digit_3 == lottery_digit_3) {
         cout << "Weeee've got a winner! <blink>$10,000!!!</blink>" << endl;
-    else if (pick_digit_2 == lottery_digit_1 && pick_digit_1 == lottery_digit_2)
-        cout << "Both numbers matched, non-ordered, you win <blink>$3,000!!!</blink>" << endl;
-    else if (pick_digit_1 == lottery_digit_1 || pick_digit_1 == lottery_digit_2 || pick_digit_2 == lottery_digit_1 || pick_digit_2 == lottery_digit_2)
-        cout << "Matched one digit, you win <blink>$1,000!!!</blink>" << endl;
-    else
-        cout << "You LOSE! You're such a loser. Your face disgusts me." << endl;
+    } else if ((pick_digit_1 == lottery_digit_1 || pick_digit_1 == lottery_digit_2 || pick_digit_1 == lottery_digit_3) &&
+               (pick_digit_2 == lottery_digit_1 || pick_digit_2 == lottery_digit_2 || pick_digit_2 == lottery_digit_3) &&
+               (pick_digit_3 == lottery_digit_1 || pick_digit_3 == lottery_digit_2 || pick_digit_3 == lottery_digit_3)
+               ) {
+        cout << "All numbers matched, non-ordered, you win <blink>$3,000!!!</blink>" << endl;
+        
+    } else if ((pick_digit_1 == lottery_digit_1 || pick_digit_1 == lottery_digit_2 || pick_digit_1 == lottery_digit_3) ||
+               (pick_digit_2 == lottery_digit_1 || pick_digit_2 == lottery_digit_2 || pick_digit_2 == lottery_digit_3) ||
+               (pick_digit_3 == lottery_digit_1 || pick_digit_3 == lottery_digit_2 || pick_digit_3 == lottery_digit_3)
+               ) {
+        cout << "Matched one number, you win <blink>$1,000!!!</blink>" << endl;
+    } else {
+        cout << "You LOSE! You're such a loser. You sicken me." << endl;
+    }
     
     return 0;
-    
     
 }
